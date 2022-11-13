@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Proposal </title>
+</head>
+<body>
+  <div width="100%">
+    <div>
+      <img class="img-thumbnail" src='g1.jpg' style='height:50%;width:70%;display:block;margin:0 auto'>
+      <p class='text-danger text-center'>You <i class='fa fa-heart'></i></p>
+
+</div>
+
+<button type="button" style='display:block;margin:0 auto'  class="btn btn-danger btn-lg" data-toggle="modal" data-target="#feelings"> <i class='fa fa-heart '></i> Open Letter</button>
+  </div>  
+        <canvas id="canvas" width="1024" height="768">
+                Laa sorry, canvas support garena!!  
+                
+           
+              </canvas>
+
+              <!-- <div style="color:red;font-size:45px;position:absolute;top:400px;left:200px">Pragya <i class='fa fa-heart'></i> </div> -->
+                <!-- The Modal -->
+               
+              
+                 
+                  
+                  <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                      
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title">Hey You <i class='fa fa-heart text-danger '></i></h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                         This one is for my dearest and nearest, which is you
+                        </div>
+                        
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <p style="position:absolute;left:15px"><small class='text-muted'>Made By Tushar with and for <i class='fa fa-heart text-danger'></i> Sanda </small></p>
+                          <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#feelings"> <i class='fa fa-heart '></i> Open Letter</button>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal fade" id="feelings">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                              <!-- Modal Header -->
+                              <div class="modal-header">
+                                <h4 class="modal-title">Hey you</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+                              
+                              <!-- Modal body -->
+                              <div class="modal-body">
+                                <p style=text-align: align="center">You are the person I have been dreaming all my life, <i class=' text-danger fa fa-heart'></i>
+								so allow me to express my intense love for you. </br>
+								</br><i class=' text-danger fa fa-heart'></i> You are the most precious thing in my life.
+                                You have fascinated my heart and seized my mind with your magnetic presence and I keep dreaming of yourself. <i class=' text-danger fa fa-heart'></i></br>
+								</br> Though I have lots of things to say, I cannot express them. A simple thing I want to say is I love you today and always.</br>
+								</br><i class=' text-danger fa fa-heart'></i> You have taken my breath away, and I want to stay in your heart forever. Please be mine!</br>
+								</br><i class=' text-danger fa fa-heart'></i> All I dream of is holding your hand and never leaving it again. Would you be my girlfriend?</br>
+								</br><i class=' text-danger fa fa-heart'></i> Every bit of my heart is in love with you, and I can’t imagine my life without you. Would you grow old with me?</br>
+								</br><i class=' text-danger fa fa-heart'></i> You are the piece that I had been missing, and I want you to complete me. Would you be mine forever?</p>
+								</br>
+								<center></br><button class="btn btn-danger" onclick="window.location.href='burst-heart.html';">Yes</button>&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="window.location.href='error.html';">No</button></center></br>
+                              </div>
+                              
+                              <!-- Modal footer -->
+                              <div class="modal-footer">
+                            <p style="position:absolute;left:15px"><small class='text-muted'>Made By Tushar with and for <i class='fa fa-heart text-danger'></i> Sanda </small></p>
+                        </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+                  
+                     
+</body>
+<script src="jquery-3.2.1.slim.min.js"</script>
+<script src="popper.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script>
+    
+   $('#myModal').modal('show');
+
+var c = document.getElementById("canvas");
+var a = c.getContext("2d");
+
+var w = c.width;
+var h = c.height;
+
+var hearts = [];
+
+function Heart(x, y, size, direction, alpha) {
+    this.hue = (Math.random() * 25)|0 + 10;
+    this.x = x;
+    this.y = y;
+    this.size = (Math.random() * 60)|0 + 50;
+    this.direction = "u";
+    this.a = 1;
+}
+
+c.onmousemove = function(e) {
+    var mouseX, mouseY;
+
+    if (e.offsetX) {
+        mouseX = e.offsetX;
+        mouseY = e.offsetY;
+    }
+    else if (e.layerX) {
+        mouseX = e.layerX;
+        mouseY = e.layerY;
+    }
+
+    hearts.push(new Heart(mouseX - 4, mouseY - 4));
+};
+
+window.setInterval(function() {
+
+    a.fillStyle = "#fff";
+    a.fillRect(0, 0, w, h);
+
+    if (hearts.length === 0) return;
+
+    hearts = hearts.filter(function(val) {
+        return val.y >= 0 && val.a >= 0;
+    });
+
+    hearts.forEach(function(heart) {
+
+        heart.y = heart.y + 2;
+        heart.a = heart.a - 0.01;
+
+        if (heart.direction === "u") {
+            heart.size = heart.size + 5;
+            if (heart.size >= 100) heart.direction = "d";
+        } else {
+            heart.size = heart.size - 5;
+            if (heart.size <= 10) heart.direction = "u";
+        }
+
+        a.save();
+        a.font = heart.size + 'px Arial';
+        a.fillStyle = "hsla(" + heart.hue + ",100%,50%," + heart.a + ")";
+        a.fillText('♥', heart.x, heart.y);
+        a.restore();
+        
+    });
+}, 17);
+</script>
+
+</html>
+
+
+
+
